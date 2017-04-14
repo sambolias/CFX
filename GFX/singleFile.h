@@ -29,9 +29,9 @@ using std::unordered_map;
 using glm::vec2;
 
 //is this bad form or do the inclusion guards make this work?
-#include "GFXshader.h"
-#include "GFXtexture.h"
-#include "GFXdisplay.h"
+//#include "GFXshader.h"
+///#include "GFXtexture.h"
+//#include "GFXdisplay.h"
 
 
 #endif // !SINGLE_FILE_H_INCLUDED

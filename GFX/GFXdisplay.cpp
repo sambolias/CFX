@@ -1,4 +1,7 @@
 #include "GFXdisplay.h"
+#include "GFXtexture.h"
+#include "GFXshader.h"
+display thisDisplay;
 
 
 display::display()

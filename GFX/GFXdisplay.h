@@ -87,5 +87,7 @@ public:
 	void setFullscreen();
 
 
-}static thisDisplay;	//this is the only display that should ever exist
+};
+
+extern display thisDisplay;	//this is the only display that should ever exist
 

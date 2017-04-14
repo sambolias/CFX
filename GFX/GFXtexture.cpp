@@ -6,6 +6,8 @@
 #define STB_IMAGE_IMPLEMENTATION 
 #include "stb_image.h"
 
+#include "GFXdisplay.h"
+#include "GFXshader.h"
 
 bool texture::isGood()
 {

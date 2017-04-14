@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 {
 	//create display window object
 	GFX window;
-
+	
 	//initialize window
 	window->setSize(vec2(800, 800));
 	window->setTitle("Matthew's Game");

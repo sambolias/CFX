@@ -20,8 +20,9 @@ using glm::vec2;
 //instance of thisDisplay, but user still has access to texture class and 
 //public members of display class
 #include "singleFile.h"
-
-
+#include "GFXdisplay.h"
+#include "GFXtexture.h"
+#include "GFXshader.h"
 
 class GFX : public display
 {
