@@ -1,8 +1,7 @@
 #pragma once
 
 #include "singleFile.h"
-//class display;
-class texture;
+
 
 class shader
 {

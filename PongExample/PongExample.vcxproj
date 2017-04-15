@@ -124,7 +124,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Users\deskj\cs372\GFX\Debug;C:\Program Files\Common Files\microsoft shared\freeglut\lib;C:\Program Files\Common Files\microsoft shared\glew-2.0.0\lib\Debug\Win32;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\deskj\cs372\GFX\Release;C:\Program Files\Common Files\microsoft shared\freeglut\lib;C:\Program Files\Common Files\microsoft shared\glew-2.0.0\lib\Debug\Win32;</AdditionalLibraryDirectories>
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);GFX.lib;freeglut.lib;glew32d.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

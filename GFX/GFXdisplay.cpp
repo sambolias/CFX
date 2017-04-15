@@ -43,6 +43,8 @@ void display::memberDraw()
 	for (unsigned int i = 0; i < textureList.size(); i++)
 	{
 		glActiveTexture(GL_TEXTURE0 + i);
+		glBindTexture(GL_TEXTURE_2D, textureList[i]->getTexture());
+
 		if (textureList[i]->isGood())
 		{
 
@@ -61,7 +63,7 @@ void display::memberDraw()
 
 
 	//reset listener needs function
-	for (int i = 0; i < keyListeners.size(); i++)
+	for (unsigned int i = 0; i < keyListeners.size(); i++)
 	{
 		keyListeners[i] = false;
 	}
@@ -105,15 +107,16 @@ void display::memberKeyboard(unsigned char k, int x, int y)
 
 void display::memberMouse(int x, int y)
 {
-	thisDisplay.mousePos = vec2(x, thisDisplay.winHeight - y);
+	mousePos = vec2(x, winHeight - y);
 }
 
 void display::openDisplay(int * ac, char ** av)
 {
 	//init glut, error handling?
 	glutInit(ac, av);	//at_EXIT_HACK for windows? research
+	//glutInit_ATEXIT_HACK(ac, av);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH);	//is there any reason to change these
-	glutInitWindowSize(thisDisplay.winWidth, thisDisplay.winHeight);
+	glutInitWindowSize(winWidth, winHeight);
 
 	glutCreateWindow(title.c_str());
 
@@ -146,8 +149,8 @@ void display::openDisplay(int * ac, char ** av)
 	glViewport(0, 0, winWidth, winHeight);
 
 	//create default texture shader
-	thisDisplay.shaderList.push_back(make_unique<shader>());
-	thisDisplay.shaderList[0]->initShader();
+	shaderList.push_back(make_unique<shader>());
+	shaderList[0]->initShader();
 
 	//run glut loop
 	glutMainLoop();
@@ -159,12 +162,12 @@ void display::openDisplay(int * ac, char ** av)
 void display::addTexture(texture &tex)
 {
 
-	thisDisplay.textureList.push_back(&tex);
+	textureList.push_back(&tex);
 }
 
 void display::setUpdate(function<void()> update)
 {
-	thisDisplay.userUpdate = update;
+	userUpdate = update;
 }
 
 void display::addKeyListener(unsigned char key)
@@ -179,12 +182,12 @@ void display::removeKeyListener(unsigned char key)
 
 bool display::checkKeyListener(unsigned char key)
 {
-	return thisDisplay.keyListeners[key];
+	return keyListeners[key];
 }
 
 vec2 display::getMousePos()
 {
-	return thisDisplay.mousePos;
+	return mousePos;
 }
 
 void display::setTitle(string t)
@@ -195,19 +198,19 @@ void display::setTitle(string t)
 void display::setSize(vec2 win)
 {
 
-	for (int i = 0; i < thisDisplay.textureList.size(); i++)
+	for (unsigned int i = 0; i < textureList.size(); i++)
 	{
 		//scale texture pos to new screen size
-		thisDisplay.textureList[i]->translateTexture(vec2(
-			(int)((float)win.x / (float)thisDisplay.winWidth * thisDisplay.textureList[i]->getExternalPosition().x),
-			(int)((float)win.y / (float)thisDisplay.winHeight * thisDisplay.textureList[i]->getExternalPosition().y)
+		textureList[i]->translateTexture(vec2(
+			(int)((float)win.x / (float)winWidth * textureList[i]->getExternalPosition().x),
+			(int)((float)win.y / (float)winHeight * textureList[i]->getExternalPosition().y)
 
 		));
 	}
 
 	//change screen size members
-	thisDisplay.winWidth = win.x;
-	thisDisplay.winHeight = win.y;
+	winWidth = (int) win.x;
+	winHeight = (int) win.y;
 
 }
 

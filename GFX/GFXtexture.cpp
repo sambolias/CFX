@@ -215,6 +215,11 @@ GLfloat * texture::getVtx()
 	return Vertices;
 }
 
+GLuint & texture::getTexture()
+{
+	return _texture;
+}
+
 int texture::usesShader()
 {
 	return usingShaderNumber;
@@ -257,7 +262,7 @@ void texture::load(vec2 &size, glm::vec4 &rgba)
 	}
 
 	//allocates image pointer
-	image = new unsigned char[4 * size.x * size.y];
+	image = new unsigned char[(int) (4 * size.x * size.y)];
 
 	glGenTextures(1, &_texture);
 	glBindTexture(GL_TEXTURE_2D, _texture);
@@ -265,7 +270,7 @@ void texture::load(vec2 &size, glm::vec4 &rgba)
 	//initialize pixels to rgba
 	int x = 0;
 	int y = 0;
-	for (size_t i = 0; i < (4 * texWidth*texHeight); i += 4)
+	for (size_t i = 0; i < (size_t)(4 * texWidth*texHeight); i += 4)
 	{
 		image[i] = (unsigned char)rgba.x;
 		image[i + 1] = (unsigned char)rgba.y;
@@ -294,7 +299,7 @@ void texture::draw(vec2 & pos, glm::vec4 & rgba)
 
 		int x = 0;
 		int y = 0;
-		for (size_t i = 0; i < (4 * texWidth*texHeight); i += 4)
+		for (size_t i = 0; i < (size_t)(4 * texWidth*texHeight); i += 4)
 		{
 
 			//if (x >= 400 && y >= 400) another example for drawFunc()
@@ -328,7 +333,7 @@ void texture::drawFunc(function<bool(glm::vec4&, int, int)> map)
 		int y = 0;
 		glm::vec4 color;
 
-		for (size_t i = 0; i < (4 * texWidth*texHeight); i += 4)
+		for (size_t i = 0; i < (size_t)(4 * texWidth*texHeight); i += 4)
 		{
 
 			if (map(color, x, y))
@@ -368,10 +373,10 @@ void texture::drawTexture()
 	//there is a conflict with textBox - it uses GL_TEXTURE1 --
 	//glActiveTexture(GL_TEXTURE0);	//this could be a conflict if drawing multiple textures
 	//needs to be planned for -prob not,when drawing one at a time
-	glBindTexture(GL_TEXTURE_2D, _texture);
+	//glBindTexture(GL_TEXTURE_2D, _texture);
 
 	//set up cam matrix for shader
-	glUniform1f((thisDisplay.shaderList[usesShader()]->getScreenWidthID()), thisDisplay.getWidth());
+	glUniform1f((thisDisplay.shaderList[usesShader()]->getScreenWidthID()), (float)thisDisplay.getWidth());
 	glUniformMatrix4fv((thisDisplay.shaderList[usesShader()]->getProjectID()), 1, GL_FALSE, &(thisDisplay.cam.Projection[0][0]));
 
 	glPushMatrix();
@@ -439,7 +444,7 @@ void texture::transformMatrices()
 	mv = transView*transModel;
 
 	//set up shader with  model * view matrix
-	glUniform1f((thisDisplay.shaderList[usingShaderNumber]->getTexWidthID()), texWidth);
+	glUniform1f((thisDisplay.shaderList[usingShaderNumber]->getTexWidthID()), (float) texWidth);
 	glUniformMatrix4fv((thisDisplay.shaderList[usingShaderNumber]->getModelID()), 1, GL_FALSE, &mv[0][0]);
 
 }
@@ -517,7 +522,7 @@ void textBox::drawTexture()
 	glLoadIdentity();
 	glColor3f(text_color.x, text_color.y, text_color.z);
 	//scale needs member variable so it can be adjusted, /8.f and .25 coincide
-	glTranslatef(externalPosition.x - size.x*scale / 2.f, externalPosition.y - size.y*scale / 2.f, -.4);
+	glTranslatef(externalPosition.x - size.x*scale / 2.f, externalPosition.y - size.y*scale / 2.f, -.4f);
 	glScalef(scale, scale, 0);
 
 	glutStrokeString(GLUT_STROKE_ROMAN, text);
@@ -534,7 +539,7 @@ void textBox::loadTexture()
 	if (isLoaded)
 	{
 		updateVertices();
-
+		std::cout << "DEBUG- this should never be loaded!\n";
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texWidth, texHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
@@ -543,7 +548,7 @@ void textBox::loadTexture()
 
 
 
-textBox::textBox(string t) : texture()//, text(reinterpret_cast<const unsigned char *>(t.c_str()))
+textBox::textBox(string t) : texture()
 {
 
 	//roundabout way to cast unsigned char * from string -- above method compiles but not correct string
@@ -595,8 +600,8 @@ void textBox::setTextSize(float size)
 
 void textBox::setBorderSize(vec2 size)
 {
-	texWidth = size.x;
-	texHeight = size.y;
+	texWidth = (int)size.x;
+	texHeight = (int)size.y;
 
 	//makeBackground();
 }
@@ -617,13 +622,14 @@ void repeatTexture::drawTexture()
 	//there is a conflict with textBox - it uses GL_TEXTURE1 --
 	//glActiveTexture(GL_TEXTURE2);	//this could be a conflict if drawing multiple textures
 	//needs to be planned for -prob not,when drawing one at a time
-	glBindTexture(GL_TEXTURE_2D, _texture);
+//	glBindTexture(GL_TEXTURE_2D, _texture);
 
 
-	for (auto p : pos) {
+	for (auto p : pos)
+	{
 
 		//set up cam matrix for shader
-		glUniform1f((thisDisplay.shaderList[usesShader()]->getScreenWidthID()), thisDisplay.getWidth());
+		glUniform1f((thisDisplay.shaderList[usesShader()]->getScreenWidthID()), (float)thisDisplay.getWidth());
 		glUniformMatrix4fv((thisDisplay.shaderList[usesShader()]->getProjectID()), 1, GL_FALSE, &(thisDisplay.cam.Projection[0][0]));
 
 		glPushMatrix();
@@ -634,30 +640,26 @@ void repeatTexture::drawTexture()
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		/////////////////////////////////////////////////////
 
-		//this messes up alpha layers and reverses layers
-		//glEnable(GL_DEPTH_TEST);
-
+		
 		//handles scale rotate and translate
 		glm::mat4 transModel;
 		glm::mat4 transView;
 
-		Model = glm::rotate(Model, glm::radians((float)rotation), glm::vec3(0.f, 0.f, -1.f));
+		Model = glm::rotate(Model, glm::radians(rotation), glm::vec3(0.f, 0.f, -1.f));
 		transModel = glm::scale(Model, glm::vec3(scaleX, scaleY, 0));
 
 
 		//need to calculate and subtract dist from center
-		//variables need to be used to make this all more clear
+		//variables need to be named to make this all more clear
 		float rx = p.x / (thisDisplay.getWidth());
 		float ry = p.y / (thisDisplay.getHeight());
-		//this isn't quite right, but on the right path i think
 
 		transView = glm::translate(thisDisplay.cam.View, glm::vec3((rx)-.5f, (ry)-.5f, -.5f));
-
 
 		mv = transView*transModel;
 
 		//set up shader with  model * view matrix
-		glUniform1f((thisDisplay.shaderList[usingShaderNumber]->getTexWidthID()), texWidth);
+		glUniform1f((thisDisplay.shaderList[usingShaderNumber]->getTexWidthID()), (float)texWidth);
 		glUniformMatrix4fv((thisDisplay.shaderList[usingShaderNumber]->getModelID()), 1, GL_FALSE, &mv[0][0]);
 
 

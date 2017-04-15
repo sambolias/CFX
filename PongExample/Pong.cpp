@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 	texture paddle;
 	paddle.load(vec2(50, 5), glm::vec4(0, 255, 149, 255));
 	paddle.resize(4);
-
+	
 
 	//create game over message
 	textBox gameover("GAME OVER!\nPress R to reset ball");

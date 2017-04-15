@@ -38,7 +38,7 @@ public:
 
 	bool fullscreen = false;
 	int winHeight = 512, winWidth = 512;	//need to find out how to init these for diff machines
-	int refresh;	//need to make sure this does what i think it does
+	int refresh = 20;	//need to make sure this does what i think it does
 	string title;
 	unordered_map<unsigned char, bool> keyListeners;
 	vec2 mousePos;

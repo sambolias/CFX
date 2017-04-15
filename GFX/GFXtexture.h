@@ -1,7 +1,6 @@
 #pragma once
 
 #include "singleFile.h"
-//class display;
 class shader;
 
 class texture
@@ -67,6 +66,7 @@ public:
 
 protected:
 	GLfloat * getVtx();
+	GLuint & getTexture();
 	int usesShader();	//this can be made public if multiple shaders are supported
 
 						//kindof confusing names, this loads it to draw, the other loads it from file
