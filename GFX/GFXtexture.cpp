@@ -1,5 +1,11 @@
 #include "GFXtexture.h"
-
+using glm::vec2;
+using std::string;
+using std::function;
+using std::make_unique;
+using std::unique_ptr;
+using std::vector;
+using std::unordered_map;
 
 //for loading textures - see docs for licensing
 

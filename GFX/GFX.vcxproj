@@ -133,7 +133,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GFX.cpp" />
     <ClCompile Include="GFXdisplay.cpp" />
     <ClCompile Include="GFXshader.cpp" />
     <ClCompile Include="GFXtexture.cpp" />
@@ -143,7 +142,7 @@
     <ClInclude Include="GFXdisplay.h" />
     <ClInclude Include="GFXshader.h" />
     <ClInclude Include="GFXtexture.h" />
-    <ClInclude Include="singleFile.h" />
+    <ClInclude Include="common.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

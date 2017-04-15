@@ -1,6 +1,6 @@
 #pragma once
 
-#include "singleFile.h"
+#include "common.h"
 
 
 class shader
@@ -10,13 +10,13 @@ class shader
 	friend class textBox;
 	friend class repeatTexture;
 
-	GLuint compileShader(GLenum shaderType, const string source);
+	GLuint compileShader(GLenum shaderType, const std::string source);
 
-	GLuint compileShaderProgram(const string &vsSource, const string &fsSource);
+	GLuint compileShaderProgram(const std::string &vsSource, const std::string &fsSource);
 
 
 	//vertex shader for loaded texture
-	string vs = R"(
+	std::string vs = R"(
 			attribute vec4 aPos;
 			attribute vec2 aCoord;
 			varying vec2 vCoord;
@@ -41,7 +41,7 @@ class shader
 		)";
 
 	//fragment shader for loaded texture
-	string fs = R"(
+	std::string fs = R"(
 			precision mediump float;
 			varying vec2 vCoord;
 			uniform sampler2D uTex;

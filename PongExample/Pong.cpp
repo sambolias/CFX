@@ -1,5 +1,7 @@
 #include "../GFX/GFX.h"
 
+using glm::vec2;
+
 bool ballDraw(glm::vec4 &color, int x, int y)
 {
 	int rad = 50;
@@ -26,11 +28,11 @@ unsigned int counter = 0;
 int main(int argc, char **argv)
 {
 	//create display window object
-	GFX window;
+	auto & window = getDisplay();
 	
 	//initialize window
-	window->setSize(vec2(800, 800));
-	window->setTitle("Matthew's Game");
+	window.setSize(vec2(800, 800));
+	window.setTitle("Matthew's Game");
 
 	//create and initialize textures
 	texture ball;
@@ -51,9 +53,9 @@ int main(int argc, char **argv)
 	gameover.translateTexture(offscreen);
 
 	//add textures to window object
-	window->addTexture(ball);
-	window->addTexture(paddle);
-	window->addTexture(gameover);
+	window.addTexture(ball);
+	window.addTexture(paddle);
+	window.addTexture(gameover);
 
 
 	//set up game physics
@@ -66,12 +68,12 @@ int main(int argc, char **argv)
 //	paddle.rotateTexture(0.f);
 	
 	//set up window control
-	window->setUpdate([&]() {
+	window.setUpdate([&]() {
 		counter++;
 		//move paddle
 		paddle.translateTexture(paddlePos);
 	
-		if (window->checkKeyListener('d') && paddlePos.x < 800)
+		if (window.checkKeyListener('d') && paddlePos.x < 800)
 		{
 			paddlePos.x += 40;
 			/*if (paddlePos.x > 400)
@@ -80,7 +82,7 @@ int main(int argc, char **argv)
 				paddlePos.y -= .75;*/
 		}
 		
-		if (window->checkKeyListener('a') && paddlePos.x > 0)
+		if (window.checkKeyListener('a') && paddlePos.x > 0)
 		{
 			paddlePos.x -= 40;
 			/*if (paddlePos.x < 400)
@@ -90,8 +92,8 @@ int main(int argc, char **argv)
 		}
 
 		//constant updates were very laggy
-	//	if(!(counter%10) && (glm::abs(window->getMousePos().x - paddlePos.x) > 20))
-		//	paddlePos.x = window->getMousePos().x;
+	//	if(!(counter%10) && (glm::abs(window.getMousePos().x - paddlePos.x) > 20))
+		//	paddlePos.x = window.getMousePos().x;
 
 		//ball physics had to slow down without slowing input
 		if (!(counter % 2))
@@ -126,7 +128,7 @@ int main(int argc, char **argv)
 		}
 
 		//reset ball
-		if (window->checkKeyListener('r'))
+		if (window.checkKeyListener('r'))
 		{
 			ballPos = vec2(400, 400);
 			ballVel = vec2(-.25, 0);
@@ -135,7 +137,7 @@ int main(int argc, char **argv)
 	});
 
 	//run glut loop
-	window->openDisplay(&argc, argv);
+	window.openDisplay(&argc, argv);
 
 	return 0;
 }

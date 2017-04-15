@@ -1,6 +1,6 @@
 #pragma once
 
-#include "singleFile.h"
+#include "common.h"
 class shader;
 
 class texture
@@ -20,7 +20,7 @@ protected:
 	float scaleX, scaleY;
 	float rotation;
 	//on screen translation   //in texture traversal
-	vec2 externalPosition, internalPosition;
+	glm::vec2 externalPosition, internalPosition;
 	//array of rgb(a) pixels
 	unsigned char * image = nullptr;
 
@@ -48,21 +48,21 @@ public:
 
 	//scalar resize, should also have scalarx and scalary transforms, but with better names
 	void resize(int width);
-	void translateTexture(vec2 pos);
-	void traverseTexture(vec2 pos);
+	void translateTexture(glm::vec2 pos);
+	void traverseTexture(glm::vec2 pos);
 	void zoomTexture(float scalar);
 	void rotateTexture(float rot);
 
 	float getZoom();
 	float getRotation();
-	vec2 getExternalPosition();
-	vec2 getInternalPosition();
+	glm::vec2 getExternalPosition();
+	glm::vec2 getInternalPosition();
 
-	void load(const string &file);
-	void load(vec2 &size, glm::vec4 &rgba);
+	void load(const std::string &file);
+	void load(glm::vec2 &size, glm::vec4 &rgba);
 
-	void draw(vec2 &pos, glm::vec4 &rgba);
-	void drawFunc(function<bool(glm::vec4&, int, int)>);
+	void draw(glm::vec2 &pos, glm::vec4 &rgba);
+	void drawFunc(std::function<bool(glm::vec4&, int, int)>);
 
 protected:
 	GLfloat * getVtx();
@@ -76,7 +76,7 @@ protected:
 	//performs transformations to texture draw vertices
 	void updateVertices();
 	//loads file using stbi_image free lib...needs error checking
-	void loadImage(const string &file);
+	void loadImage(const std::string &file);
 
 	//performs transformations to texture shader matrices
 	void transformMatrices();
@@ -91,12 +91,12 @@ class repeatTexture : public texture
 {
 private:
 
-	vector<vec2> pos;
+	std::vector<glm::vec2> pos;
 
 	void drawTexture() override;
 public:
 
-	void setDrawPositions(vector<vec2> &coords);
+	void setDrawPositions(std::vector<glm::vec2> &coords);
 
 };
 
@@ -108,13 +108,13 @@ class textBox : public texture
 
 
 public:
-	textBox(string t);
+	textBox(std::string t);
 
-	void setText(string text);
+	void setText(std::string text);
 	void setBackground(glm::vec4 rgba);
 	void setTextColor(glm::vec4 rgba);
 	void setTextSize(float size);
-	void setBorderSize(vec2 size);
+	void setBorderSize(glm::vec2 size);
 
 private:
 	void makeBackground();
@@ -125,7 +125,7 @@ private:
 	glm::vec3 text_color = glm::vec3(1, 1, 1);
 
 	float scale = .25f;
-	textBox(const textBox & cpy);	//this should probably be a deleted function
+	textBox(const textBox & cpy);	//this should probably be a deleted std::function
 protected:
 	virtual void drawTexture() override;
 	virtual void loadTexture() override;

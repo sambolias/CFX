@@ -1,8 +1,12 @@
 #pragma once
 
-#include "singleFile.h"
+#include "common.h"
 class texture;
 class shader;
+class display;
+
+display & getDisplay();
+
 
 class camera
 {
@@ -39,19 +43,19 @@ public:
 	bool fullscreen = false;
 	int winHeight = 512, winWidth = 512;	//need to find out how to init these for diff machines
 	int refresh = 20;	//need to make sure this does what i think it does
-	string title;
-	unordered_map<unsigned char, bool> keyListeners;
-	vec2 mousePos;
+	std::string title;
+	std::unordered_map<unsigned char, bool> keyListeners;
+	glm::vec2 mousePos;
 	camera cam;
 
 
-	vector<unique_ptr<shader>> shaderList;
+	std::vector<std::unique_ptr<shader>> shaderList;
 	//consider using a map with named textures
 	//find out if this could use a unique pointer
-	vector<texture*> textureList;
+	std::vector<texture*> textureList;
 
 	//to be called every iteration of glutLoop
-	function<void()> userUpdate;
+	std::function<void()> userUpdate;
 
 	//default functions passed globally above this class
 	void memberTimer(int r);
@@ -72,18 +76,18 @@ public:
 
 											//member accessor functions
 	void addTexture(texture &tex);
-	void setUpdate(function<void()> update);
+	void setUpdate(std::function<void()> update);
 	void addKeyListener(unsigned char key);
 	void removeKeyListener(unsigned char key);
 	bool checkKeyListener(unsigned char key);
-	vec2 getMousePos();
+	glm::vec2 getMousePos();
 
 	int getHeight() const;
 	int getWidth() const;
 
 	//display init (pre-open) functions
-	void setTitle(string t);
-	void setSize(vec2 win);
+	void setTitle(std::string t);
+	void setSize(glm::vec2 win);
 	void setFullscreen();
 
 

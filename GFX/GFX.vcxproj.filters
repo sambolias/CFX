@@ -18,9 +18,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GFX.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GFXdisplay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -44,7 +41,7 @@
     <ClInclude Include="GFXtexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="singleFile.h">
+    <ClInclude Include="common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

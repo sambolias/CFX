@@ -1,6 +1,13 @@
 #include "GFXdisplay.h"
 #include "GFXtexture.h"
 #include "GFXshader.h"
+using glm::vec2;
+using std::string;
+using std::function;
+using std::make_unique;
+using std::unique_ptr;
+using std::vector;
+using std::unordered_map;
 display thisDisplay;
 
 
@@ -12,6 +19,11 @@ display::display()
 	//eye			  center 			    up
 	cam.View = glm::lookAt(glm::vec3(0, 0, .5), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
+}
+
+display & getDisplay()
+{
+	return thisDisplay;
 }
 
 void defaultTimer(int r)
@@ -113,8 +125,8 @@ void display::memberMouse(int x, int y)
 void display::openDisplay(int * ac, char ** av)
 {
 	//init glut, error handling?
-	glutInit(ac, av);	//at_EXIT_HACK for windows? research
-	//glutInit_ATEXIT_HACK(ac, av);
+//	glutInit(ac, av);	//at_EXIT_HACK for windows? research
+	glutInit_ATEXIT_HACK(ac, av);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH);	//is there any reason to change these
 	glutInitWindowSize(winWidth, winHeight);
 
