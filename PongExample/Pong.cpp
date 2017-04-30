@@ -61,9 +61,9 @@ int main(int argc, char **argv)
 	//set up game physics
 	vec2 paddlePos(400, 50);
 	
-	vec2 ballPos(400, 400);
+	vec2 ballPos(400, 600);
 	vec2 ballVel(-.25, 0);
-	vec2 ballAccel(0, -9.8/400.f);	//scaled down version of gravity
+	vec2 ballAccel(0, -9.8/5000.0);	//scaled down version of gravity
 
 //	paddle.rotateTexture(0.f);
 	
@@ -130,7 +130,7 @@ int main(int argc, char **argv)
 		//reset ball
 		if (window.checkKeyListener('r'))
 		{
-			ballPos = vec2(400, 400);
+			ballPos = vec2(400, 600);
 			ballVel = vec2(-.25, 0);
 			gameover.translateTexture(offscreen);
 		}

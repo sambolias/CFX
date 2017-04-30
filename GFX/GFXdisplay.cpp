@@ -62,9 +62,10 @@ void display::memberDraw()
 
 			shaderList[textureList[i]->usesShader()]->useShader(textureList[i]->getVtx());
 			textureList[i]->loadTexture();
+			
 		}
-
 		textureList[i]->drawTexture();
+		
 
 	}
 
@@ -122,12 +123,12 @@ void display::memberMouse(int x, int y)
 	mousePos = vec2(x, winHeight - y);
 }
 
-void display::openDisplay(int * ac, char ** av)
+void display::openDisplay(int *ac, char ** av)
 {
 	//init glut, error handling?
-//	glutInit(ac, av);	//at_EXIT_HACK for windows? research
-	glutInit_ATEXIT_HACK(ac, av);
-	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH);	//is there any reason to change these
+	glutInit(ac, av);	//at_EXIT_HACK for windows? research
+	//glutInit_ATEXIT_HACK(ac, av);
+	glutInitDisplayMode(GLUT_RGBA);// | GLUT_DEPTH);	//is there any reason to change these
 	glutInitWindowSize(winWidth, winHeight);
 
 	glutCreateWindow(title.c_str());

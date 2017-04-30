@@ -42,7 +42,7 @@ public:
 
 	bool fullscreen = false;
 	int winHeight = 512, winWidth = 512;	//need to find out how to init these for diff machines
-	int refresh = 20;	//need to make sure this does what i think it does
+	int refresh = 40;	//need to make sure this does what i think it does
 	std::string title;
 	std::unordered_map<unsigned char, bool> keyListeners;
 	glm::vec2 mousePos;
