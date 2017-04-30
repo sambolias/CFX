@@ -123,15 +123,14 @@ void texture::updateVertices()
 	//this is not aspect ratio...not sure if this is right
 	//need to figure it out and rename variables
 	//I think the trick may be normalize
-	float aspectY = (float)texHeight; // (float)texWidth;
-	float aspectX = (float)texWidth; // (float)texWidth;
+	float aspectY = (float)texHeight; 
+	float aspectX = (float)texWidth; 
 
 	vec2 vtxNormals = glm::normalize(vec2(aspectX, aspectY));
 
 	GLfloat x = (internalPosition.x - 5.f);
 	GLfloat y = (internalPosition.y - 5.f);
 
-	//	vec2 aspect( zoom * aspectX, zoom * aspectY);
 	vec2 aspect(vtxNormals.x, vtxNormals.y);
 
 
@@ -376,10 +375,7 @@ void texture::loadTexture()
 
 void texture::drawTexture()
 {
-	//there is a conflict with textBox - it uses GL_TEXTURE1 --
-	//glActiveTexture(GL_TEXTURE0);	//this could be a conflict if drawing multiple textures
-	//needs to be planned for -prob not,when drawing one at a time
-	//glBindTexture(GL_TEXTURE_2D, _texture);
+	
 
 	//set up cam matrix for shader
 	glUniform1f((thisDisplay.shaderList[usesShader()]->getScreenWidthID()), (float)thisDisplay.getWidth());
@@ -465,60 +461,13 @@ void textBox::drawTexture()
 {
 
 	vec2 size = vec2(glutStrokeLengthf(GLUT_STROKE_ROMAN, text), glutStrokeHeight(GLUT_STROKE_ROMAN));
-	/*
-	-background texture was leaking through to other draws for some reason
-	-doesn't need a background for now, this is not great text anyways
-	-should find a better method before spending too much time on it
-
-	if (!isLoaded)
-	{
-
-	load(size, bg_color);
-
-	thisDisplay.shaderList[usesShader()]->useShader(Vertices);
-	loadTexture();
-
-
-	}
-
-	//this is to draw text background...might be better to have a separate
-	//texture draw function, because this is the exact same as the original
-	//with the text draw appended
-	//also i need to declare override
-
-	//except for having to use a different active texture
-	//there is a lot available, do I need to use more than 2?
-
-	//	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _texture);
-
-	//set up cam matrix for shader
-	glUniform1f((thisDisplay.shaderList[usesShader()]->getScreenWidthID()), thisDisplay.getWidth());
-	glUniformMatrix4fv((thisDisplay.shaderList[usesShader()]->getProjectID()), 1, GL_FALSE, &(thisDisplay.cam.Projection[0][0]));
-
-	glPushMatrix();
-
-	//needed to overlap sprites - otherwise transparant background draw overwrites previously drawn background
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	/////////////////////////////////////////////////////
-	//handles scale rotate and translate
-	transformMatrices();
-
-	//this is the actual draw
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, Indices);
-
-	glPopMatrix();
-
-	*/
-	//draw text last
+	
+	
 
 	glPushMatrix();
 
 	//this unloads default shader program
 	//so that gltransforms can be used
-	//glActiveTexture(GL_TEXTURE0+20);
-	//glBindTexture(GL_TEXTURE_2D, _texture);
 
 	glUseProgram(NULL);
 	glMatrixMode(GL_PROJECTION);
@@ -534,9 +483,6 @@ void textBox::drawTexture()
 	glutStrokeString(GLUT_STROKE_ROMAN, text);
 	glPopMatrix();
 
-	//reset active texture 
-	//	glActiveTexture(GL_TEXTURE0);
-	//	glUseProgram()
 
 }
 
@@ -559,7 +505,7 @@ textBox::textBox(string t) : texture()
 
 	//roundabout way to cast unsigned char * from string -- above method compiles but not correct string
 
-	unsigned char * temp = new unsigned char[t.length()];
+//	unsigned char * temp = new unsigned char[t.length()];
 	int i = 0;
 
 	setText(t);
@@ -625,10 +571,6 @@ void textBox::makeBackground()
 
 void repeatTexture::drawTexture()
 {
-	//there is a conflict with textBox - it uses GL_TEXTURE1 --
-	//glActiveTexture(GL_TEXTURE2);	//this could be a conflict if drawing multiple textures
-	//needs to be planned for -prob not,when drawing one at a time
-//	glBindTexture(GL_TEXTURE_2D, _texture);
 
 
 	for (auto p : pos)

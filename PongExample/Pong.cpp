@@ -28,7 +28,8 @@ unsigned int counter = 0;
 int main(int argc, char **argv)
 {
 	//create display window object
-	auto & window = getDisplay();
+	auto & window = thisDisplay;//getDisplay();
+	
 	
 	//initialize window
 	window.setSize(vec2(800, 800));
@@ -68,7 +69,7 @@ int main(int argc, char **argv)
 //	paddle.rotateTexture(0.f);
 	
 	//set up window control
-	window.setUpdate([&]() {
+	window.setUpdate([&window, &paddle, &paddlePos, &ball, &ballPos, &ballAccel, &ballVel, &offscreen, &onscreen, &gameover]() {
 		counter++;
 		//move paddle
 		paddle.translateTexture(paddlePos);
@@ -96,14 +97,14 @@ int main(int argc, char **argv)
 		//	paddlePos.x = window.getMousePos().x;
 
 		//ball physics had to slow down without slowing input
-		if (!(counter % 2))
-		{
+//		if (!(counter % 2))
+//		{
 			ball.translateTexture(ballPos);
 			ballPos += ballVel;
 
 			if (ballVel.y > -5.f)	//terminal velocity
 				ballVel += ballAccel;
-		}
+//		}
 
 		//collision detection
 		if ( ((ballPos.y < 70) && (ballPos.y > 40)) && 
