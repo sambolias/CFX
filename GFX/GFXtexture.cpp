@@ -244,7 +244,7 @@ void texture::load(const string & file)
 
 	//opengl part
 	glGenTextures(1, &_texture);
-	glBindTexture(GL_TEXTURE_2D, _texture);
+	//glBindTexture(GL_TEXTURE_2D, _texture);
 	//stb_image.h part
 	loadImage(file);
 
@@ -270,7 +270,7 @@ void texture::load(vec2 &size, glm::vec4 &rgba)
 	image = new unsigned char[(int) (4 * size.x * size.y)];
 
 	glGenTextures(1, &_texture);
-	glBindTexture(GL_TEXTURE_2D, _texture);
+	//glBindTexture(GL_TEXTURE_2D, _texture);
 
 	//initialize pixels to rgba
 	int x = 0;

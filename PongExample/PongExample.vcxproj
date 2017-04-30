@@ -89,12 +89,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files\Common Files\microsoft shared\freeglut\include;C:\Program Files\Common Files\microsoft shared\glew-2.0.0\include;C:\Program Files\Common Files\microsoft shared\glm;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>S:\C++ Includes\glm-master\glm;S:\C++ Includes\glew-2.0.0\include;S:\C++ Includes\freeglut\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\Users\deskj\cs372\GFX\Debug;C:\Program Files\Common Files\microsoft shared\freeglut\lib;C:\Program Files\Common Files\microsoft shared\glew-2.0.0\lib\Debug\Win32;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);GFX.lib;freeglut.lib;glew32d.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>S:\C++ Includes\freeglut\lib;S:\C++ Includes\glew-2.0.0\lib\Release\Win32;S:\Sam\Programs\Graphics\GFX\Debug;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);GFX.lib;glew32.lib;freeglut.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -104,9 +104,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>S:\C++ Includes\glew-2.0.0\include;S:\C++ Includes\freeglut\include;S:\C++ Includes\glm-master\glm;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>S:\C++ Includes\freeglut\lib;S:\C++ Includes\glew-2.0.0\lib\Release\Win32;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;glew32.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -114,18 +117,18 @@
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files\Common Files\microsoft shared\freeglut\include;C:\Program Files\Common Files\microsoft shared\glew-2.0.0\include;C:\Program Files\Common Files\microsoft shared\glm;</AdditionalIncludeDirectories>
-      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>S:\C++ Includes\glm-master\glm;S:\C++ Includes\glew-2.0.0\include;S:\C++ Includes\freeglut\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Users\deskj\cs372\GFX\Release;C:\Program Files\Common Files\microsoft shared\freeglut\lib;C:\Program Files\Common Files\microsoft shared\glew-2.0.0\lib\Release\Win32;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);GFX.lib;glew32.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>S:\C++ Includes\freeglut-MSVC-3.0.0-2.mp\freeglut\lib;S:\C++ Includes\glew-2.0.0\lib\Release\Win32;S:\Sam\Programs\Graphics\GFX\Release;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);GFX.lib;glew32.lib;freeglut.lib;opengl32.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,11 +140,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>S:\C++ Includes\glew-2.0.0\include;S:\C++ Includes\freeglut\include;S:\C++ Includes\glm-master\glm;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;glew32.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>S:\C++ Includes\freeglut\lib;S:\C++ Includes\glew-2.0.0\lib\Release\Win32;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
